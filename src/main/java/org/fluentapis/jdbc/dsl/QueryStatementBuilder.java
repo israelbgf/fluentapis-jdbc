@@ -19,6 +19,7 @@ public class QueryStatementBuilder extends BaseStatementBuilder<QueryStatementBu
 	}
 	
 	public <T> T execute(ResultSetConverter<T> converter){
+		validate();
 		try {
 			Statement statement = new Statement(rawStatement);
 			PreparedStatement preparedStatement = connection.prepareStatement(statement.getNativeStatement());

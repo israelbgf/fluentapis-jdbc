@@ -45,4 +45,9 @@ abstract class BaseStatementBuilder<T extends BaseStatementBuilder<?>> {
 		}		
 	}
 	
+	protected void validate(){
+		if(connection == null){
+			throw new IllegalStateException("You must define a connection first!");
+		}
+	}
 }
