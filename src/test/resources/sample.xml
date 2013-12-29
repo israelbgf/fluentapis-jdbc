@@ -1,0 +1,5 @@
+<statements>
+	<statement name="simple_example">
+		select * from test
+	</statement>
+</statements>
