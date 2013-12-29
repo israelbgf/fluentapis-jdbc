@@ -2,7 +2,8 @@ package org.fluentapis.jdbc;
 
 import static org.fluentapis.jdbc.converter.ConverterFactory.asList;
 import static org.fluentapis.jdbc.converter.ConverterFactory.asMap;
-	import static org.fluentapis.jdbc.dsl.StatementBuilderFactory.createQuery;
+import static org.fluentapis.jdbc.dsl.StatementBuilderFactory.createQuery;
+import static org.fluentapis.jdbc.dsl.StatementsFileBuilder.fromFile;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
@@ -75,6 +76,17 @@ public class QueryTest{
 		assertArrayEquals(new String[]{"1", "B"}, resultMap.get(1).get(1));
 		assertArrayEquals(new String[]{"2", "C"}, resultMap.get(2).get(0));
     }
+	
+	@Test
+	public void fullSample1(){
+		
+		List<Object[]> result = createQuery(fromFile("src/test/resources/sample.xml").named("simple_example"))
+									.on(connection).execute(asList());
+		
+		assertEquals(3, result.size());
+		assertArrayEquals(new Object[]{1, "1", "A"}, result.get(0));
+		
+	}
 
 	
 }
