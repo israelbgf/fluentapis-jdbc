@@ -1,11 +1,21 @@
 package org.fluentapis.jdbc.dsl;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 
 import org.fluentapis.jdbc.StatementsFile;
 
 public class StatementsFileBuilder {
 
+	public static StatementBuilder fromClassLoader(String pathname) {
+		InputStream inputStream = StatementsFileBuilder.class.getClassLoader().getResourceAsStream(pathname);
+		if(inputStream == null){
+			throw new RuntimeException("File not found with current classloader.");
+		}
+		return new StatementBuilder(inputStream);
+	}
+	
 	public static StatementBuilder fromFile(String pathname) {
 		return new StatementBuilder(pathname);
 	}
@@ -18,6 +28,7 @@ public class StatementsFileBuilder {
 
 		private String pathname;
 		private File file;
+		private InputStream stream;
 
 		public StatementBuilder(String pathname) {
 			this.pathname = pathname;
@@ -27,11 +38,24 @@ public class StatementsFileBuilder {
 			this.file = file;
 		}
 
+		public StatementBuilder(InputStream stream) {
+			this.stream = stream;
+		}
+
 		public String named(String name){
-			if(pathname == null){
-				return new StatementsFile(file).get(name);
-			}else{
-				return new StatementsFile(pathname).get(name);
+			
+			if(stream != null){
+				return new StatementsFile(stream).get(name);
+			}
+			
+			try {
+				if(pathname == null){
+					return new StatementsFile(file).get(name);
+				}else{
+					return new StatementsFile(pathname).get(name);
+				}
+			} catch (FileNotFoundException e) {
+				throw new RuntimeException(e);
 			}
 		}
 		

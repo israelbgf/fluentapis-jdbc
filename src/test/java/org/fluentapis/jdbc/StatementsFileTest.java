@@ -3,6 +3,7 @@ package org.fluentapis.jdbc;
 import static org.junit.Assert.assertEquals;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 
 import org.fluentapis.jdbc.dsl.StatementsFileBuilder;
 import org.junit.Test;
@@ -13,7 +14,7 @@ public class StatementsFileTest {
 	private static final String EXPECTED_STATEMENT = "select * from test";
 
 	@Test
-	public void get(){
+	public void get() throws FileNotFoundException{
 		StatementsFile file;
 		
 		file = new StatementsFile(SAMPLE_FILE);
@@ -33,6 +34,9 @@ public class StatementsFileTest {
 		statement = StatementsFileBuilder.fromFile(new File(SAMPLE_FILE)).named("simple_example");
 		assertEquals(EXPECTED_STATEMENT, statement);
 
+		statement = StatementsFileBuilder.fromClassLoader("sample.xml").named("simple_example");
+		assertEquals(EXPECTED_STATEMENT, statement);
+		
 	}
 	
 }
