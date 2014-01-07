@@ -13,8 +13,17 @@ public class InsertStatementBuilder extends BaseStatementBuilder<InsertStatement
 		super();
 	}
 	
-	public <T> T execute(){
-		return execute(new ReturningParameter<T>(new String[0], null));
+	public int execute(){
+		try {
+			Statement statement = new Statement(rawStatement);
+			PreparedStatement jdbcStatement = connection.prepareStatement(statement.getNativeStatement());
+			
+			applyParameters(statement, jdbcStatement);
+			return jdbcStatement.executeUpdate();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+
 	}
 	
 	public <T> T execute(ReturningParameter<T> returningParameter){

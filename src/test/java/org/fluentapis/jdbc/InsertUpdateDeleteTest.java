@@ -36,7 +36,7 @@ public class InsertUpdateDeleteTest {
 	}
 	
 	@Test
-	public void insert() throws SQLException{
+	public void returningInsert() throws SQLException{
 		
 		Integer returnedValue = createInsert("insert into test(first_name, second_name) values(?, ?)").on(connection)
 									.withValues("Seven", "Seventh")
@@ -45,6 +45,21 @@ public class InsertUpdateDeleteTest {
 		connection.commit();
 		
 		Assert.assertEquals(2, returnedValue.intValue());
+		Assert.assertEquals(1, createQuery("select * from test where id = ?").on(connection)
+									.withValues(returnedValue)
+									.execute().size());
+	}
+	
+	@Test
+	public void simpleInsert() throws SQLException{
+		
+		Integer returnedValue = createInsert("insert into test(first_name, second_name) values(?, ?)").on(connection)
+									.withValues("Seven", "Seventh")
+									.execute();
+		
+		connection.commit();
+		
+		Assert.assertEquals(1, returnedValue.intValue());
 		Assert.assertEquals(1, createQuery("select * from test where id = ?").on(connection)
 									.withValues(returnedValue)
 									.execute().size());
