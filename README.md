@@ -1,7 +1,7 @@
 fluentapis-jdbc
 ===============
 
-An set of fluent APIs designed to build a small and nice DSL to work with JDBC.
+A set of fluent APIs designed to build a small and nice DSL to work with JDBC.
 
 In a nutshell to create a query, you can write a code like this:
 
