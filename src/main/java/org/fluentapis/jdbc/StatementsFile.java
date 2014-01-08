@@ -40,7 +40,10 @@ public class StatementsFile {
 		for (int i = 0; i < nodes.getLength(); i++) {
 			Element element= (Element) nodes.item(i);
 			if(element.getAttribute("name").equals(statementName)){
-				return element.getTextContent().trim();
+				return element.getTextContent()
+							.trim()
+							.replaceAll("[\\n\\t\\r\\t]", " ")
+							.replaceAll("\\s+", " "); // Some drivers like ORACLE doesn't allow special characters in the query.
 			}
 		}
 		

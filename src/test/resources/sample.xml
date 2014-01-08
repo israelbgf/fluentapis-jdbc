@@ -2,4 +2,12 @@
 	<statement name="simple_example">
 		select * from test
 	</statement>
+	<statement name="complex_example">
+	
+		select 
+			* 
+				from 
+				            test
+				            
+	</statement>
 </statements>
