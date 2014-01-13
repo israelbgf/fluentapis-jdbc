@@ -5,7 +5,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import org.fluentapis.jdbc.Statement;
-import org.fluentapis.jdbc.converter.ConverterFactory;
+import org.fluentapis.jdbc.converter.ResultSetConverters;
 import org.fluentapis.jdbc.converter.ResultSetConverter;
 
 public class QueryStatementBuilder extends BaseStatementBuilder<QueryStatementBuilder>{
@@ -15,7 +15,7 @@ public class QueryStatementBuilder extends BaseStatementBuilder<QueryStatementBu
 	}
 	
 	public List<Object[]> execute(){
-		return execute(ConverterFactory.asList());
+		return execute(ResultSetConverters.asList());
 	}
 	
 	public <T> T execute(ResultSetConverter<T> converter){

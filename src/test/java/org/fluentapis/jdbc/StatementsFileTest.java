@@ -13,6 +13,7 @@ import java.sql.Statement;
 import java.util.List;
 
 import org.fluentapis.jdbc.dsl.StatementsFileBuilder;
+import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -70,6 +71,11 @@ public class StatementsFileTest {
 		
 		assertEquals(0, list.size());
 		
+	}
+	
+	@AfterClass
+	public static void after() throws SQLException{
+		connection.close();
 	}
 	
 }

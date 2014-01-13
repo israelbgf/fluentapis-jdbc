@@ -1,7 +1,7 @@
 package org.fluentapis.jdbc;
 
-import static org.fluentapis.jdbc.converter.ConverterFactory.asList;
-import static org.fluentapis.jdbc.converter.ConverterFactory.asMap;
+import static org.fluentapis.jdbc.converter.ResultSetConverters.asList;
+import static org.fluentapis.jdbc.converter.ResultSetConverters.asMap;
 import static org.fluentapis.jdbc.dsl.StatementBuilderFactory.createQuery;
 import static org.fluentapis.jdbc.dsl.StatementsFileBuilder.fromFile;
 import static org.junit.Assert.assertArrayEquals;
@@ -14,6 +14,7 @@ import java.sql.Statement;
 import java.util.List;
 import java.util.Map;
 
+import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -88,5 +89,9 @@ public class QueryTest{
 		
 	}
 
+	@AfterClass
+	public static void after() throws SQLException{
+		connection.close();
+	}
 	
 }

@@ -11,6 +11,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -38,9 +39,9 @@ public class InsertUpdateDeleteTest {
 	@Test
 	public void returningInsert() throws SQLException{
 		
-		Integer returnedValue = createInsert("insert into test(first_name, second_name) values(?, ?)").on(connection)
+		Number returnedValue = createInsert("insert into test(first_name, second_name) values(?, ?)").on(connection)
 									.withValues("Seven", "Seventh")
-									.execute(returning("id").asInteger());
+									.execute(returning("id").asNumber());
 		
 		connection.commit();
 		
@@ -85,6 +86,11 @@ public class InsertUpdateDeleteTest {
 
 		
 		Assert.assertEquals(1, affectedRows);
+	}
+	
+	@AfterClass
+	public static void after() throws SQLException{
+		connection.close();
 	}
 	
 }
