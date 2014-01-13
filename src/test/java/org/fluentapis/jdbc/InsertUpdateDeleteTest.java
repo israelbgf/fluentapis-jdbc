@@ -6,29 +6,16 @@ import static org.fluentapis.jdbc.dsl.StatementBuilderFactory.createInsert;
 import static org.fluentapis.jdbc.dsl.StatementBuilderFactory.createQuery;
 import static org.fluentapis.jdbc.dsl.StatementBuilderFactory.createUpdate;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import org.junit.AfterClass;
+import org.fluentapis.jdbc.util.MemoryDatabaseTest;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class InsertUpdateDeleteTest {
+public class InsertUpdateDeleteTest extends MemoryDatabaseTest{
 
-	private static Connection connection;
-
-	@BeforeClass
-	public static void beforeClass() throws SQLException{
-		connection = DriverManager.getConnection("jdbc:h2:mem:test");
-		
-		Statement statement = connection.createStatement();
-		statement.execute("create table test(id identity, first_name varchar(255), second_name varchar(255))");
-	}
-	
 	@Before
 	public void before() throws SQLException{
 		Statement statement = connection.createStatement();
@@ -86,11 +73,6 @@ public class InsertUpdateDeleteTest {
 
 		
 		Assert.assertEquals(1, affectedRows);
-	}
-	
-	@AfterClass
-	public static void after() throws SQLException{
-		connection.close();
 	}
 	
 }

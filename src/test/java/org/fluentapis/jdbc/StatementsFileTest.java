@@ -6,33 +6,17 @@ import static org.junit.Assert.assertEquals;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.List;
 
 import org.fluentapis.jdbc.dsl.StatementsFileBuilder;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
+import org.fluentapis.jdbc.util.MemoryDatabaseTest;
 import org.junit.Test;
 
-public class StatementsFileTest {
+public class StatementsFileTest extends MemoryDatabaseTest {
 	
 	private static final String SAMPLE_FILE = "src/test/resources/sample.xml";
 	private static final String EXPECTED_STATEMENT = "select * from test";
 
-	private static Connection connection;
-
-	@BeforeClass
-	public static void before() throws SQLException{
-		connection = DriverManager.getConnection("jdbc:h2:mem:test");
-		
-		Statement statement = connection.createStatement();
-		statement.execute("create table test(id int, first_name varchar(255), second_name varchar(255))");
-	}
-		
-	
 	@Test
 	public void get() throws FileNotFoundException{
 		StatementsFile file;
@@ -71,11 +55,6 @@ public class StatementsFileTest {
 		
 		assertEquals(0, list.size());
 		
-	}
-	
-	@AfterClass
-	public static void after() throws SQLException{
-		connection.close();
 	}
 	
 }
