@@ -1,13 +1,26 @@
 package org.fluentapis.jdbc.dsl;
 
+import java.io.File;
+import java.io.InputStream;
+
 import org.fluentapis.jdbc.converter.ListConverter;
 import org.fluentapis.jdbc.converter.MapConverter;
 import org.fluentapis.jdbc.converter.NumberConverter;
 import org.fluentapis.jdbc.converter.ResultSetConverter;
 
+/**
+ * This class acts as a Facade to the DSL. With this single class you can access
+ * all the features of FluentJDBC.
+ * 
+ * @author Israel Fonseca
+ * 
+ */
+public class FluentJDBC {
 
-public class Statements {
-
+	/*
+	 * Entry Points
+	 */
+	
 	public static QueryStatementBuilder createQuery(String statement){
 		QueryStatementBuilder builder = new QueryStatementBuilder();
 		builder.rawStatement = statement;
@@ -34,9 +47,13 @@ public class Statements {
 		return builder;
 	}
 	
-	public static ReturningParameterBuilder returning(String column) {
-		return new ReturningParameterBuilder(new String[] { column });
+	public static ReturningParameterBuilder returning(String... columns) {
+		return new ReturningParameterBuilder(columns);
 	}
+	
+	/*
+	 * Converters
+	 */
 	
 	public static ListConverter asList(){
 		return new ListConverter();
@@ -48,6 +65,26 @@ public class Statements {
 
 	public static ResultSetConverter<Number> asNumber() {
 		return new NumberConverter();
+	}
+	
+	/*
+	 * Statements File
+	 */
+	
+	public static StatementsFileBuilder fromClassLoader(String pathname) {
+		InputStream inputStream = StatementsFileBuilder.class.getClassLoader().getResourceAsStream(pathname);
+		if(inputStream == null){
+			throw new RuntimeException("File not found with current classloader.");
+		}
+		return new StatementsFileBuilder(inputStream);
+	}
+	
+	public static StatementsFileBuilder fromFile(String pathname) {
+		return new StatementsFileBuilder(pathname);
+	}
+
+	public static StatementsFileBuilder fromFile(File file) {
+		return new StatementsFileBuilder(file);
 	}
 	
 }

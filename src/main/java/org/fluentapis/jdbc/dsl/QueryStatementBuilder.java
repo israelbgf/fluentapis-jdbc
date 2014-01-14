@@ -13,7 +13,7 @@ public class QueryStatementBuilder extends BaseStatementBuilder<QueryStatementBu
 	}
 	
 	public List<Object[]> execute(){
-		return execute(Statements.asList());
+		return execute(FluentJDBC.asList());
 	}
 	
 	public <T> T execute(ResultSetConverter<T> converter){

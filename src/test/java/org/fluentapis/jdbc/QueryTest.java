@@ -1,9 +1,9 @@
 package org.fluentapis.jdbc;
 
-import static org.fluentapis.jdbc.dsl.Statements.asList;
-import static org.fluentapis.jdbc.dsl.Statements.asMap;
-import static org.fluentapis.jdbc.dsl.Statements.createQuery;
-import static org.fluentapis.jdbc.dsl.StatementsFileBuilder.fromFile;
+import static org.fluentapis.jdbc.dsl.FluentJDBC.asList;
+import static org.fluentapis.jdbc.dsl.FluentJDBC.asMap;
+import static org.fluentapis.jdbc.dsl.FluentJDBC.createQuery;
+import static org.fluentapis.jdbc.dsl.FluentJDBC.fromFile;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 

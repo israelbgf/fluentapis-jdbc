@@ -1,14 +1,14 @@
 package org.fluentapis.jdbc;
 
-import static org.fluentapis.jdbc.dsl.Statements.createQuery;
-import static org.fluentapis.jdbc.dsl.StatementsFileBuilder.fromClassLoader;
+import static org.fluentapis.jdbc.dsl.FluentJDBC.createQuery;
+import static org.fluentapis.jdbc.dsl.FluentJDBC.fromClassLoader;
+import static org.fluentapis.jdbc.dsl.FluentJDBC.fromFile;
 import static org.junit.Assert.assertEquals;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.List;
 
-import org.fluentapis.jdbc.dsl.StatementsFileBuilder;
 import org.fluentapis.jdbc.file.StatementsFile;
 import org.fluentapis.jdbc.util.MemoryDatabaseTest;
 import org.junit.Test;
@@ -33,16 +33,16 @@ public class StatementsFileTest extends MemoryDatabaseTest {
 	public void testDsl(){
 		String statement;
 		
-		statement = StatementsFileBuilder.fromFile(SAMPLE_FILE).named("simple_example");
+		statement = fromFile(SAMPLE_FILE).named("simple_example");
 		assertEquals(EXPECTED_STATEMENT, statement);
 		
-		statement = StatementsFileBuilder.fromFile(new File(SAMPLE_FILE)).named("simple_example");
+		statement = fromFile(new File(SAMPLE_FILE)).named("simple_example");
 		assertEquals(EXPECTED_STATEMENT, statement);
 
-		statement = StatementsFileBuilder.fromClassLoader("sample.xml").named("simple_example");
+		statement = fromClassLoader("sample.xml").named("simple_example");
 		assertEquals(EXPECTED_STATEMENT, statement);
 		
-		statement = StatementsFileBuilder.fromClassLoader("sample.xml").named("complex_example");
+		statement = fromClassLoader("sample.xml").named("complex_example");
 		assertEquals(EXPECTED_STATEMENT, statement);
 		
 	}
