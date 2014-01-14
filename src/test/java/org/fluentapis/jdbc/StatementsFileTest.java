@@ -1,6 +1,6 @@
 package org.fluentapis.jdbc;
 
-import static org.fluentapis.jdbc.dsl.StatementBuilderFactory.createQuery;
+import static org.fluentapis.jdbc.dsl.Statements.createQuery;
 import static org.fluentapis.jdbc.dsl.StatementsFileBuilder.fromClassLoader;
 import static org.junit.Assert.assertEquals;
 
@@ -9,6 +9,7 @@ import java.io.FileNotFoundException;
 import java.util.List;
 
 import org.fluentapis.jdbc.dsl.StatementsFileBuilder;
+import org.fluentapis.jdbc.file.StatementsFile;
 import org.fluentapis.jdbc.util.MemoryDatabaseTest;
 import org.junit.Test;
 

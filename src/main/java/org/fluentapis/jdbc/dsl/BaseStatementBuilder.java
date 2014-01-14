@@ -6,8 +6,6 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.fluentapis.jdbc.Statement;
-
 @SuppressWarnings("unchecked")
 abstract class BaseStatementBuilder<T extends BaseStatementBuilder<?>> {
 
@@ -32,7 +30,7 @@ abstract class BaseStatementBuilder<T extends BaseStatementBuilder<?>> {
 		return (T) this;
 	}
 
-	protected void applyParameters(Statement statement, PreparedStatement jdbcStatement) throws SQLException {
+	protected void applyParameters(StatementHolder statement, PreparedStatement jdbcStatement) throws SQLException {
 		int index = 1;
 		for(String parameterName : statement.getParameters()){
 			Object value = parameters.get(parameterName);

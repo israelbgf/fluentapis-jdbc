@@ -1,8 +1,8 @@
 package org.fluentapis.jdbc;
 
-import static org.fluentapis.jdbc.converter.ResultSetConverters.asList;
-import static org.fluentapis.jdbc.converter.ResultSetConverters.asMap;
-import static org.fluentapis.jdbc.dsl.StatementBuilderFactory.createQuery;
+import static org.fluentapis.jdbc.dsl.Statements.asList;
+import static org.fluentapis.jdbc.dsl.Statements.asMap;
+import static org.fluentapis.jdbc.dsl.Statements.createQuery;
 import static org.fluentapis.jdbc.dsl.StatementsFileBuilder.fromFile;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;

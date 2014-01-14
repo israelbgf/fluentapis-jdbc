@@ -5,7 +5,6 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
-import org.fluentapis.jdbc.Statement;
 import org.junit.Test;
 
 public class StatementTest {
@@ -14,13 +13,13 @@ public class StatementTest {
 	
 	@Test
 	public void stringParsing(){
-		Statement statement = new Statement(input);
+		StatementHolder statement = new StatementHolder(input);
 		assertEquals("select * from test where name = ? and id = ? and id <> ?", statement.getNativeStatement());
 	}
 
 	@Test
 	public void parametersParsing(){
-		Statement statement = new Statement(input);
+		StatementHolder statement = new StatementHolder(input);
 		
 		List<String> parameters = statement.getParameters();
 		System.out.println(parameters);

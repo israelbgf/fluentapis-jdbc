@@ -4,7 +4,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import org.fluentapis.jdbc.Statement;
 import org.fluentapis.jdbc.dsl.ReturningParameterBuilder.ReturningParameter;
 
 public class InsertStatementBuilder extends BaseStatementBuilder<InsertStatementBuilder>{
@@ -15,7 +14,7 @@ public class InsertStatementBuilder extends BaseStatementBuilder<InsertStatement
 	
 	public int execute(){
 		try {
-			Statement statement = new Statement(rawStatement);
+			StatementHolder statement = new StatementHolder(rawStatement);
 			PreparedStatement jdbcStatement = connection.prepareStatement(statement.getNativeStatement());
 			
 			applyParameters(statement, jdbcStatement);
@@ -28,7 +27,7 @@ public class InsertStatementBuilder extends BaseStatementBuilder<InsertStatement
 	
 	public <T> T execute(ReturningParameter<T> returningParameter){
 		try {
-			Statement statement = new Statement(rawStatement);
+			StatementHolder statement = new StatementHolder(rawStatement);
 			
 			PreparedStatement jdbcStatement;
 			

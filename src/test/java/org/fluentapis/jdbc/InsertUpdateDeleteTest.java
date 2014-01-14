@@ -1,10 +1,10 @@
 package org.fluentapis.jdbc;
 
-import static org.fluentapis.jdbc.dsl.ReturningParameterBuilder.returning;
-import static org.fluentapis.jdbc.dsl.StatementBuilderFactory.createDelete;
-import static org.fluentapis.jdbc.dsl.StatementBuilderFactory.createInsert;
-import static org.fluentapis.jdbc.dsl.StatementBuilderFactory.createQuery;
-import static org.fluentapis.jdbc.dsl.StatementBuilderFactory.createUpdate;
+import static org.fluentapis.jdbc.dsl.Statements.returning;
+import static org.fluentapis.jdbc.dsl.Statements.createDelete;
+import static org.fluentapis.jdbc.dsl.Statements.createInsert;
+import static org.fluentapis.jdbc.dsl.Statements.createQuery;
+import static org.fluentapis.jdbc.dsl.Statements.createUpdate;
 
 import java.sql.SQLException;
 import java.sql.Statement;

@@ -1,4 +1,4 @@
-package org.fluentapis.jdbc;
+package org.fluentapis.jdbc.dsl;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -6,13 +6,13 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Statement {
+class StatementHolder {
 
 	private String originalStatement;
 	private String nativeStatement;
 	private List<String> parameters = new ArrayList<String>();
 
-	public Statement(String statement) {
+	public StatementHolder(String statement) {
 		this.originalStatement = statement;
 	}
 
@@ -68,7 +68,7 @@ public class Statement {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Statement other = (Statement) obj;
+		StatementHolder other = (StatementHolder) obj;
 		return getNativeStatement().equals(other.getNativeStatement());
 	}
 	

@@ -4,8 +4,6 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
-import org.fluentapis.jdbc.Statement;
-import org.fluentapis.jdbc.converter.ResultSetConverters;
 import org.fluentapis.jdbc.converter.ResultSetConverter;
 
 public class QueryStatementBuilder extends BaseStatementBuilder<QueryStatementBuilder>{
@@ -15,13 +13,13 @@ public class QueryStatementBuilder extends BaseStatementBuilder<QueryStatementBu
 	}
 	
 	public List<Object[]> execute(){
-		return execute(ResultSetConverters.asList());
+		return execute(Statements.asList());
 	}
 	
 	public <T> T execute(ResultSetConverter<T> converter){
 		validate();
 		try {
-			Statement statement = new Statement(rawStatement);
+			StatementHolder statement = new StatementHolder(rawStatement);
 			PreparedStatement preparedStatement = connection.prepareStatement(statement.getNativeStatement());
 			applyParameters(statement, preparedStatement);;
 			preparedStatement.executeQuery();

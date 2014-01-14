@@ -1,5 +1,6 @@
 package org.fluentapis.jdbc;
 
+import org.fluentapis.jdbc.file.StatementsFile;
 import org.junit.runners.Suite.SuiteClasses;
 
 @SuiteClasses({ 

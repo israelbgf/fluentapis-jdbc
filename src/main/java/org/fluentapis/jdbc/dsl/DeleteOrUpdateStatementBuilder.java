@@ -3,8 +3,6 @@ package org.fluentapis.jdbc.dsl;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import org.fluentapis.jdbc.Statement;
-
 public class DeleteOrUpdateStatementBuilder extends BaseStatementBuilder<DeleteOrUpdateStatementBuilder>{
 
 	DeleteOrUpdateStatementBuilder() {
@@ -13,7 +11,7 @@ public class DeleteOrUpdateStatementBuilder extends BaseStatementBuilder<DeleteO
 	
 	public int execute(){
 		try {
-			Statement statement = new Statement(rawStatement);
+			StatementHolder statement = new StatementHolder(rawStatement);
 			
 			PreparedStatement jdbcStatement =
 					connection.prepareStatement(statement.getNativeStatement());

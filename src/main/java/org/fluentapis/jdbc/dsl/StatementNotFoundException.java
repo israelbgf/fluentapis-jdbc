@@ -1,4 +1,4 @@
-package org.fluentapis.jdbc;
+package org.fluentapis.jdbc.dsl;
 
 @SuppressWarnings("serial")
 public class StatementNotFoundException extends RuntimeException {
